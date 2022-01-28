@@ -12,10 +12,11 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 import os
+from django.utils.translation import gettext_lazy as _
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
@@ -27,7 +28,6 @@ SECRET_KEY = 'django-insecure-335e+*!yfz8-i*-aa)aw@-gq)!r76l(*(60q$m6fu*(2^2(&_o
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -42,8 +42,10 @@ INSTALLED_APPS = [
     'rest_framework',
     "corsheaders",
     'taggit',
+    'rosetta',
+    'parler',
+    # 'parler-rest',
 
-    
     # ichki app
     'post',
     'card',
@@ -61,7 +63,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
-    "corsheaders.middleware.CorsMiddleware",
+    "corsheaders.middleware.CorsMiddleware", # new
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -74,8 +76,6 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:3001",
     "http://localhost:8000",
-    # 'http://127.0.0.1:8000/',
-    # 'http://127.0.0.1:3000/',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -132,7 +132,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en'
 
 TIME_ZONE = 'Asia/Tashkent'
 
@@ -140,24 +140,48 @@ USE_I18N = True
 
 USE_TZ = True
 
+LANGUAGES = (
+('en', _('English')),
+('ru', _('Russian')),
+('uz', _('Uzbek')),
+('tr', _('Turkish')),
+)
+
+LOCALE_PATHS = (
+os.path.join(BASE_DIR, 'locale/'),
+)
+
+
+PARLER_LANGUAGES = {
+    None: (
+        {'code': 'en',},
+        {'code': 'ru',},
+        {'code': 'uz',},
+        {'code': 'tr',},
+    ),
+    'default': {
+        'fallback': 'en',             
+        'hide_untranslated': False,   
+    }
+}
+
+PARLER_DEFAULT_LANGUAGE_CODE = 'en'
+PARLER_ENABLE_CACHING = True
+PARLER_CACHE_PREFIX = ''
+
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
-
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (str(BASE_DIR.joinpath('static')),) # new
 STATIC_ROOT = str(BASE_DIR.joinpath('staticfiles')) # new
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
-
-
 # MEDIA
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
-
-
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field

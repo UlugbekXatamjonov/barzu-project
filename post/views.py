@@ -8,7 +8,6 @@ class ListPost(ListAPIView):
     queryset = Post.objects.order_by('-created').all()
     serializer_class = PostSerializer
     
-
 class DetailPost(RetrieveAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer

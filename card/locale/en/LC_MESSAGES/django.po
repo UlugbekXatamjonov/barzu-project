@@ -1,0 +1,42 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#: .\card\urls.py:9
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-01-28 10:39+0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\card\models.py:17
+#, fuzzy
+#| msgid " title "
+msgid "title"
+msgstr "title"
+
+#: .\card\models.py:18
+#, fuzzy
+#| msgid " slug "
+msgid "slug"
+msgstr "slug"
+
+#: .\card\models.py:19
+#, fuzzy
+#| msgid " body "
+msgid "body"
+msgstr "body"
+
+#: .\card\urls.py:8
+msgid "<int:pk>/card/"
+msgstr ""

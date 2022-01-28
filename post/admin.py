@@ -1,11 +1,12 @@
 from django.contrib import admin
 from .models import  Post
 from django.utils.html import mark_safe
+from parler.admin import TranslatableAdmin
 
 # Register your models here.
 
 @admin.register(Post)
-class PostAdmin(admin.ModelAdmin):
+class PostAdmin(TranslatableAdmin):
     list_display = ('title', 'slug', 'author', 'created','status',"avatar_tag")
     list_filter = ('status', 'created',  'author')
     search_fields = ('title', 'body')
@@ -16,8 +17,3 @@ class PostAdmin(admin.ModelAdmin):
 
     def get_prepopulated_fields(self, request, obj=None):
         return {'slug': ('title',)}
-
-    def avatar_tag(self, obj):
-        return obj.avatar_tag
-
-    avatar_tag.short_description = 'Rasmi'

@@ -2,7 +2,6 @@ from rest_framework import serializers
 from .models import Post
 from taggit.serializers import (TagListSerializerField, TaggitSerializer)
 
-
 class PostSerializer(serializers.ModelSerializer, TaggitSerializer):
     tags = TagListSerializerField()
     class Meta:
