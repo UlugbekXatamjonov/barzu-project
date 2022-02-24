@@ -18,8 +18,9 @@ class Post(TranslatableModel):
         title = models.CharField(_("title"), max_length=200, db_index=True),
         slug = models.SlugField(_("slug"), max_length=250, unique=True, db_index=True),
         body = models.TextField(_("body"), db_index=True),
-        tags = TaggableManager(_('tags')), # Tag maneger
+        # tags = TaggableManager(_('tags')), # Tag maneger
     )
+    # tags = TaggableManager(), # Tag maneger
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='blog_posts')
     image = models.ImageField(upload_to="post_images/%Y/%m/%d/")
     created = models.DateTimeField(auto_now_add=True) 
@@ -36,11 +37,11 @@ class Post(TranslatableModel):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('postes:detail_post',
+        return reverse('post:post_detail',
                        args=[self.created.year,
                              self.created.month,
                              self.created.day,
-                             self.slug])
+                             self.pk])
 
     def avatar_tag(self):
         return mark_safe('<img src="/media/%s" width="50" height="50" />' % (self.image))

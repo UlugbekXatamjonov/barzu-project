@@ -5,6 +5,7 @@ from django.utils.html import mark_safe
 from django.utils.translation import gettext_lazy as _
 from parler.models import TranslatableModel, TranslatedFields
 
+
 # Create your models here.
 
 STATUS_CHOICES = ( 
@@ -32,11 +33,11 @@ class Card(TranslatableModel):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('cardes:detail_card',
+        return reverse('card:card_detail',
                        args=[self.created.year,
                              self.created.month,
                              self.created.day,
-                             self.slug])
+                             self.pk])
                         
     def card_tag(self):
         return mark_safe('<img src="/media/%s" width="50" height="50" />' % (self.image))

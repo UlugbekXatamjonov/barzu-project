@@ -23,9 +23,14 @@ from django.utils.translation import gettext_lazy as _
 
 urlpatterns = i18n_patterns(
     path(_('admin/'), admin.site.urls),
-    path(_('postes/'), include('post.urls'), name="postes"),
-    path(_('cardes/'), include('card.urls'), name="cardes"),
+    path(_('postes/'), include('post.urls'), name="post"), # main pages is here
+    path(_('cardes/'), include('card.urls'), name="cards"),
+    path(_('message/'), include('message.urls'), name='message'),
 )
+
+
+
+
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

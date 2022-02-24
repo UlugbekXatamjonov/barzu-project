@@ -1,24 +1,46 @@
 from django.shortcuts import render, redirect
-from .models import Message
-from .forms import MessageForm
+from .models import *
+from .forms import *
+from django.views.generic import CreateView, TemplateView
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from . serializers import *
+
 
 # Create your views here.
 
-class MessageFormView(request):
-    if request.method == 'POST':
-        contact = Contact()
-        fullname.request.POST.get('fullname')
-        email.request.POST.get('email')
-        subject.request.POST.get('subject')
-        body.request.POST.get('body')
-        created.request.POST.get('created')
-        contact.fullname = fullname
-        contact.email = email
-        contact.subject = subject
-        contact.body = body
-        contact.created = created
-        contact.save()
-        # return HttpResponse("<h1> Thanks for contact us </h1>")
+class MessageView(CreateView):
+    template_name = "contact.html"
+    form_class =  MessageForm
 
-    # return render(request, 'messages.html')
+    def get_success_url(self):
+        return ('done') 
+
+
+def done_page(request):
+    return render(request, 'done_message.html', locals())
+  
+
+# ---------------New view-------------------- 
+
+class Message_View(APIView):
+    
+    serializer_class = MessageSerializer
+  
+    def get(self, request):
+        detail = [ {"name": detail.name,
+                    "subject": detail.subject,
+                    "email":detail.email,
+                    "body":detail.body
+                    }
+
+        for detail in Message.objects.all()]
+        return Response(detail)
+  
+    def post(self, request):
+  
+        serializer = MessageSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return  Response(serializer.data)
 

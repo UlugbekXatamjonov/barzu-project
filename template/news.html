@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load i18n %}
+
+
+{% block content %}
+<!-- Slider Start -->
+
+<section class="section service-2">
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-lg-7 text-center">
+				<div class="section-title">
+					<h2>Yangiliklar</h2>
+					<div class="divider mx-auto my-4"></div>
+					<p>Lets know moreel necessitatibus dolor asperiores illum possimus sint voluptates incidunt molestias nostrum laudantium. Maiores porro cumque quaerat.</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			{% for post in posts %}
+			<div class="col-lg-4 col-md-6 ">
+				<div class="department-block mb-5">
+					<a href="{{post.get_absolute_url}}"><img src="{{ post.image.url }}" alt="" class="img-fluid w-100"></a>
+					<div class="content">
+						<h4 class="mt-4 mb-2 title-color"><a href="{{post.get_absolute_url}}">{{ post.title }}</a></h4>
+						<p class="mb-4">{{ post.body }}</p>
+						<a href="{{post.get_absolute_url}}" class="read-more">Learn More  <i class="icofont-simple-right ml-2"></i></a>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+</section>
+   
+{% endblock content %}
